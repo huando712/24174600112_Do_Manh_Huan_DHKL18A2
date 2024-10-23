@@ -12,6 +12,5 @@ log4x = math.log(x,4)
 logx2 = math.log(2,x)
 y=log4x+logx2
 #tính đến số thập phân thứ 2
-y_rounded = round(y , 2)
-print(f"giá trị của phương trình là:{y_rounded}")
+print(f"giá trị của phương trình là:{y:.2f}")
 
