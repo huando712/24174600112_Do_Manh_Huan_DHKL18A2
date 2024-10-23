@@ -13,7 +13,7 @@ else:
 #đổi giây ra giờ 
 h = s/3600
 print(f"số giờ điện đã dùng{h}")
-dien_nang_tieu_thu = 220*2.7*h
+dien_nang_tieu_thu = 220*2.7*h # U*I*thời gian sử dụng
 
 tien_dien_phai_tra = dien_nang_tieu_thu*7000
 print(f"số tiền điện phải trả là{tien_dien_phai_tra}vnđ")
