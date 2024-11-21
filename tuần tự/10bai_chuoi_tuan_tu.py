@@ -12,7 +12,6 @@ chuoi_ket_qua = " ".join(tach_chuoi) #Nối các phần tử trong danh sách th
 print(f"chuoi ket qua: {chuoi_ket_qua}")
 
 
-
 #bài 3 Viết chương trình nhập vào họ tên đầy đủ, trả về tên và họ riêng
 ho_va_ten = input("nhap vao ten:")
 ten_nhap_vao = ho_va_ten.split()

@@ -36,4 +36,28 @@ ma_tran_1 = [[2, 4, 5, 6],
 ma_tran_2 =  [[2, 4, 5, 6],
               [5, 4, 6, 1],
               [4, 7, 0, 3],
-              [1, 2, 8, 6],]            
+              [1, 2, 8, 6],]
+ket_qua = [[0, 0, 0, 0],
+           [0, 0, 0, 0],
+           [0, 0, 0, 0],
+           [0, 0, 0, 0],]
+for hang in range(len(ma_tran_1)):
+    for cot in range(len(ma_tran_1[0])):
+        ket_qua[hang][cot]=ma_tran_1[hang][cot] - ma_tran_2[hang][cot]
+        
+for tru_hai_ma_tran in ket_qua:  # Dùng dấu gạch dưới nếu không cần tên biến
+    print(f"tru hai ma tran; {tru_hai_ma_tran}")
+
+
+
+#nhân 2 ma trận 
+matrix_a = [[2, 4],
+            [2, 7],]
+matrix_b = [[3, 6],
+           [2, 2],]
+ket_qua = [[0, 0],
+           [0, 0],]
+for h in range(len(matrix_a)):
+    for c in range(len(matrix_a[h])):
+        ket_qua[h][c]= matrix_a[h][c] * ma_tran_b[h][c]
+print(f"nhan hai ma tran {ket_qua}")
