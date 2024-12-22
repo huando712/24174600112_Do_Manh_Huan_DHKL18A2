@@ -1,17 +1,16 @@
 import csv
-import os
 
 FILE_PATH = 'csv_file/ds_khoa.csv'
 
 def ensure_file_exists():
-    """Đảm bảo thư mục và tệp CSV tồn tại."""
-    dir_path = os.path.dirname(FILE_PATH)
-    if not os.path.exists(dir_path):
-        os.makedirs(dir_path)
-    if not os.path.exists(FILE_PATH):
+    """Đảm bảo tệp CSV tồn tại."""
+    try:
+        with open(FILE_PATH, mode='r') as file:
+            pass
+    except FileNotFoundError:
         with open(FILE_PATH, mode='w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(["Mã Khoa", "Tên Khoa", "Tổng Số Phòng"])  # Tạo tiêu đề cột
+            writer.writerow(["Mã Khoa", "Tên Khoa", "Tổng Số Phòng"])
 
 def view_khoa():
     """Hiển thị danh sách khoa."""
@@ -19,10 +18,11 @@ def view_khoa():
     with open(FILE_PATH, mode='r') as file:
         reader = csv.reader(file)
         data = list(reader)
-        if len(data) <= 1:  # Không có dữ liệu
+        if len(data) <= 1:
             print("Danh sách khoa trống!")
             return
         print("{:<10} {:<20} {:<15}".format("Mã Khoa", "Tên Khoa", "Tổng Số Phòng"))
         print("-" * 45)
         for row in data[1:]:
             print("{:<10} {:<20} {:<15}".format(row[0], row[1], row[2]))
+
