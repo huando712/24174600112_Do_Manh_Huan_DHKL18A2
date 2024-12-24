@@ -1,12 +1,15 @@
 
+
 from QuanLyKhoa.view_khoa import view_khoa
 from QuanLyKhoa.add_khoa import add_khoa
 from QuanLyKhoa.edit_khoa import edit_khoa
 from QuanLyKhoa.delete_khoa import delete_khoa
 from QuanLyKhoa.search_khoa import search_khoa
 
-# Import chức năng từ các module quản lý phòng khoa
-from QuanLyThongTinPongKhoa import xem_phong, them_phong, sua_phong, xoa_phong, tim_kiem_phong
+from QuanLyThongTinPongKhoa import  xem_phong, them_phong, sua_phong, xoa_phong, tim_kiem_phong
+
+
+from XuLyVatTu import  xem_phong_kem_vat_tu,  sua_vat_tu, xoa_vat_tu, tim_kiem_vat_tu
 
 def menu_khoa():
     """Hiển thị menu quản lý khoa."""
@@ -108,12 +111,104 @@ def menu_phong_khoa():
         except ValueError:
             print("Lỗi: Vui lòng nhập một số hợp lệ.")
 
-def menu():
+            print("Lựa chọn không hợp lệ. Vui lòng thử lại.")
+
+from XuLyVatTu.file_csv import doc_file_csv, luu_file_csv
+
+
+def menu_vat_tu():
+    """Hiển thị menu quản lý vật tư."""
+    ds_vat_tu = []  # Khởi tạo danh sách rỗng
+    file_path = "ds_vat_tu.csv"
+    
+    while True:
+        print("\nQuản lý vật tư")
+        print("1. Xem danh sách vật tư")
+        print("2. Chỉnh sửa thông tin vật tư")
+        print("3. Xóa thông tin vật tư")
+        print("4. Tìm kiếm thông tin vật tư")
+        print("5. Đọc danh sách từ file")
+        print("6. Lưu danh sách vào file")
+        print("0. Thoát")
+        
+        choice = input("Nhập lựa chọn: ").strip()
+        
+        if choice == "1":
+            if not ds_vat_tu:
+                print("Danh sách vật tư trống. Vui lòng thêm hoặc đọc từ file.")
+            else:
+                for item in ds_vat_tu:
+                    print(item)
+        
+        elif choice == "2":
+            if not ds_vat_tu:
+                print("Danh sách vật tư trống. Vui lòng thêm hoặc đọc từ file.")
+            else:
+                ma_vat_tu = input("Nhập mã vật tư cần chỉnh sửa: ").strip()
+                key = input("Nhập thuộc tính cần chỉnh sửa: ").strip()
+                value = input("Nhập giá trị mới: ").strip()
+                for vat_tu in ds_vat_tu:
+                    if vat_tu["Ma vat tu"] == ma_vat_tu:
+                        if key in vat_tu:
+                            vat_tu[key] = value
+                            print(f"Đã cập nhật thông tin cho vật tư {ma_vat_tu}.")
+                        else:
+                            print(f"Thuộc tính '{key}' không tồn tại.")
+                        break
+                else:
+                    print(f"Không tìm thấy vật tư với mã {ma_vat_tu}.")
+        
+        elif choice == "3":
+            if not ds_vat_tu:
+                print("Danh sách vật tư trống. Vui lòng thêm hoặc đọc từ file.")
+            else:
+                ma_vat_tu = input("Nhập mã vật tư cần xóa: ").strip()
+                ds_vat_tu = [vat_tu for vat_tu in ds_vat_tu if vat_tu["Ma vat tu"] != ma_vat_tu]
+                print(f"Đã xóa vật tư với mã {ma_vat_tu}.")
+        
+        elif choice == "4":
+            if not ds_vat_tu:
+                print("Danh sách vật tư trống. Vui lòng thêm hoặc đọc từ file.")
+            else:
+                keyword = input("Nhập từ khóa tìm kiếm: ").strip()
+                ket_qua = [vat_tu for vat_tu in ds_vat_tu if keyword in str(vat_tu.values())]
+                if ket_qua:
+                    for vat_tu in ket_qua:
+                        print(vat_tu)
+                else:
+                    print("Không tìm thấy vật tư phù hợp.")
+        
+        elif choice == "5":
+            ds_vat_tu = doc_file_csv(file_path)
+            if ds_vat_tu:
+                print("Đã đọc danh sách vật tư từ file.")
+            else:
+                print("Không có dữ liệu trong file hoặc file không tồn tại.")
+        
+        elif choice == "6":
+            luu_file_csv(file_path, ds_vat_tu)
+        
+        elif choice == "0":
+            print("Thoát chương trình.")
+            break
+        
+        else:
+            print("Lựa chọn không hợp lệ. Vui lòng thử lại.")
+
+
+
+
+        
+
+
+
+def main_menu():
     """Hiển thị menu chính."""
     while True:
         print("\n--- Hệ Thống Quản Lý ---")
         print("1. Quản lý khoa")
-        print("2. Quản lý phòng khoa")
+        print("2. Quản lý thông tin phòng khoa")
+        print("3. Quản lý vật tư")
         print("0. Thoát")
         try:
             choice = int(input("Chọn chức năng: "))
@@ -121,8 +216,10 @@ def menu():
                 menu_khoa()
             elif choice == 2:
                 menu_phong_khoa()
+            elif choice == 3:
+                menu_vat_tu()
             elif choice == 0:
-                print("Thoát chương trình.")
+                print("Thoát hệ thống quản lý.")
                 break
             else:
                 print("Vui lòng chọn số hợp lệ.")
@@ -130,5 +227,4 @@ def menu():
             print("Lỗi: Vui lòng nhập một số hợp lệ.")
 
 if __name__ == "__main__":
-    menu()
-
+    main_menu()

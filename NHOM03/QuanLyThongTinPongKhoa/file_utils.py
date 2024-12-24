@@ -1,6 +1,6 @@
 import csv
 
-FILE_PATH = "ds_phong_khoa.csv"
+FILE_PATH = 'csv_file\ds_phong_khoa.csv'
 
 def doc_danh_sach_phong():
     try:
