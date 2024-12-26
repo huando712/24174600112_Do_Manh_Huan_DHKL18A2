@@ -1,5 +1,7 @@
-file_path = "XuLyVatTu"
-def kiem_tra_input_vat_tu(data):
-    if not data.get("ma_vat_tu") or not data.get("ten_vat_tu"):
-        return False, "Thiếu mã vật tư hoặc tên vật tư."
-    return True, "Dữ liệu hợp lệ."
+def check_input():
+    print("=== Kiểm tra input cho vật tư ===")
+    input_data = input("Nhập dữ liệu cho vật tư: ")
+    if input_data.strip():
+        print(f"Dữ liệu hợp lệ: {input_data}")
+    else:
+        print("Dữ liệu không hợp lệ.")

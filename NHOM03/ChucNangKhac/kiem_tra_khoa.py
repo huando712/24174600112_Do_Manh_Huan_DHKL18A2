@@ -1,5 +1,7 @@
-file_path = "QuanLyKhoa"
-def kiem_tra_input_khoa(data):
-    if not data.get("ma_khoa") or not data.get("ten_khoa"):
-        return False, "Thiếu mã khoa hoặc tên khoa."
-    return True, "Dữ liệu hợp lệ."
+def check_input():
+    print("=== Kiểm tra input cho khoa ===")
+    input_data = input("Nhập dữ liệu cho khoa: ")
+    if input_data.strip():
+        print(f"Dữ liệu hợp lệ: {input_data}")
+    else:
+        print("Dữ liệu không hợp lệ.")

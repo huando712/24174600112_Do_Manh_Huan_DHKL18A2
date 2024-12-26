@@ -11,35 +11,39 @@ def ensure_file_exists(file_path=FILE_PATH, headers=None):
         with open(file_path, mode='r') as file:
             pass
     except FileNotFoundError:
+        # Tạo tệp mới với tiêu đề cột nếu tệp không tồn tại
         with open(file_path, mode='w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(headers)
 
 def validate_string_length(value, max_length):
     """Đảm bảo chuỗi không vượt quá độ dài tối đa."""
-    if len(value) > max_length:
-        return value[:max_length]  # Cắt chuỗi nếu vượt quá độ dài
-    return value
+    return value[:max_length] if len(value) > max_length else value
 
 def view_khoa():
     """Hiển thị danh sách khoa từ tệp CSV."""
     ensure_file_exists(FILE_PATH, ["Mã Khoa", "Tên Khoa", "Tổng Số Phòng"])
+    
     try:
         with open(FILE_PATH, mode='r') as file:
             reader = csv.reader(file)
             data = list(reader)
+            
             if len(data) <= 1:  # Kiểm tra nếu không có dữ liệu
                 print("Danh sách khoa trống!")
                 return
+            
             # Hiển thị tiêu đề
             print("{:<10} {:<20} {:<15}".format("Mã Khoa", "Tên Khoa", "Tổng Số Phòng"))
             print("-" * 45)
-            for row in data[1:]:
+            
+            for row in data[1:]:  # Bỏ qua dòng tiêu đề
                 try:
-                    row[2] = int(row[2]) if row[2] else 0 # Đảm bảo Tổng Số Phòng là số nguyên
+                    row[2] = int(row[2]) if row[2] else 0  # Đảm bảo Tổng Số Phòng là số nguyên
                 except ValueError:
                     row[2] = 0
                 print("{:<10} {:<20} {:<15}".format(row[0], row[1], row[2]))
+
     except Exception as e:
         print(f"Lỗi khi đọc tệp: {e}")
 

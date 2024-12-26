@@ -1,5 +1,9 @@
+def check_input():
+    print("=== Kiểm tra input cho phòng khoa ===")
+    input_data = input("Nhập dữ liệu cho phòng khoa: ")
+    if input_data.strip():
+        print(f"Dữ liệu hợp lệ: {input_data}")
+    else:
+        print("Dữ liệu không hợp lệ.")
 
-def kiem_tra_input_phong_khoa(data):
-    if not data.get("ma_phong") or not data.get("ten_phong"):
-        return False, "Thiếu mã phòng hoặc tên phòng."
-    return True, "Dữ liệu hợp lệ."
+

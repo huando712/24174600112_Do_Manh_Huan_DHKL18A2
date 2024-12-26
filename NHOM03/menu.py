@@ -1,5 +1,4 @@
-
-
+#menu
 from QuanLyKhoa.view_khoa import view_khoa
 from QuanLyKhoa.add_khoa import add_khoa
 from QuanLyKhoa.edit_khoa import edit_khoa
@@ -112,7 +111,7 @@ def menu_phong_khoa():
             print("Lỗi: Vui lòng nhập một số hợp lệ.")
 
             print("Lựa chọn không hợp lệ. Vui lòng thử lại.")
-# menu.py
+
 from XuLyVatTu import delete, edit, search, view
 
 # Đường dẫn file dữ liệu
@@ -149,52 +148,42 @@ from ChucNangKhac  import kiem_tra_khoa
 from ChucNangKhac import kiem_tra_phong_khoa
 from ChucNangKhac import kiem_tra_vat_tu
 from ChucNangKhac import sap_xep
+
 def menu_khac():
-    while True:
-        
-        print("\nchức năng khác")
-        print("1. Kiểm tra input cho khoa")
-        print("2. Kiểm tra input cho phòng khoa")
-        print("3. Kiểm tra input cho vật tư")
-        print("4. Sắp xếp danh sách")
-        print("5. Thoát")
+    print("=== Chức năng khác ===")
+    print("1. Kiểm tra input cho khoa")
+    print("2. Kiểm tra input cho phòng khoa")
+    print("3. Kiểm tra input cho vật tư")
+    print("4. Sắp xếp danh sách")
+    choice = input("Chọn chức năng: ")
+    if choice == "1":
+        kiem_tra_khoa.check_input()
+    elif choice == "2":
+        kiem_tra_phong_khoa.check_input()
+    elif choice == "3":
+        kiem_tra_vat_tu.check_input()
+    elif choice == "4":
+        menu_sap_xep()
 
-        lua_chon = input("Nhập lựa chọn: ")
-        
-        if lua_chon == "1":
-            data = {"ma_khoa": "K001", "ten_khoa": "Công nghệ thông tin"}
-            valid, message = kiem_tra_khoa(data)
-            print(message)
-        
-        elif lua_chon == "2":
-            data = {"ma_phong": "P001", "ten_phong": "Phòng nghiên cứu"}
-            valid, message = kiem_tra_phong_khoa(data)
-            print(message)
-
-        elif lua_chon == "3":
-            data = {"ma_vat_tu": "V001", "ten_vat_tu": "Bàn ghế"}
-            valid, message = kiem_tra_vat_tu(data)
-            print(message)
-        
-        elif lua_chon == "4":
-            danh_sach = [
-                {"ma": "3", "ten": "B"},
-                {"ma": "1", "ten": "A"},
-                {"ma": "2", "ten": "C"}
-            ]
-            key = "ma"
-            sorted_list = sap_xep(danh_sach, key)
-            print(sorted_list)
-        
-        elif lua_chon == "5":
-            print("Thoát chương trình.")
-            break
-        
-        else:
-            print("Lựa chọn không hợp lệ. Vui lòng thử lại!")
-
-
-
+def menu_sap_xep():
+    print("=== Sắp xếp danh sách ===")
+    print("1. Sắp xếp danh sách khoa")
+    print("2. Sắp xếp danh sách phòng khoa")
+    print("3. Sắp xếp danh sách vật tư")
+    print("0. Quay lại")
+    
+    choice = input("Chọn danh sách muốn sắp xếp: ")
+    
+    if choice == "1":
+        sap_xep.sort_khoa()  # Thực hiện sắp xếp khoa
+    elif choice == "2":
+        sap_xep.sort_phong_khoa()  # Thực hiện sắp xếp phòng khoa
+    elif choice == "3":
+        sap_xep.sort_vat_tu()  # Thực hiện sắp xếp vật tư
+    elif choice == "0":
+        print("Quay lại menu chính.")
+    else:
+        print("Lựa chọn không hợp lệ. Vui lòng chọn lại.")
 
 def main_menu():
     """Hiển thị menu chính."""
@@ -203,7 +192,6 @@ def main_menu():
         print("1. Quản lý khoa")
         print("2. Quản lý thông tin phòng khoa")
         print("3. Xử lý vật tư")
-        
         print("4. Các chức năng khác")
         print("0. Thoát")
         try:

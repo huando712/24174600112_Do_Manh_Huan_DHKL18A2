@@ -1,17 +1,27 @@
-import csv #mở thư viện
-from QuanLyKhoa.view_khoa import ensure_file_exists, FILE_PATH # form để có thể chạy ở file menu.py
+
+import csv
+
+FILE_PATH = 'csv_file\ds_khoa.csv'  # đường dẫn tệp 
 
 def add_khoa():
     """Thêm một khoa mới."""
-    ensure_file_exists() #kiểm tra xem tệp có tồn tại hay không
-    ma_khoa = input("Nhập mã khoa: ")#nhập các yêu cầu vô
+    try:
+        # Cố gắng mở tệp để kiểm tra sự tồn tại
+        with open(FILE_PATH, mode='r', newline='') as file:
+            pass  # Nếu mở tệp thành công, không làm gì cả
+    except FileNotFoundError:
+        # Nếu tệp không tồn tại, tạo một tệp mới và thêm tiêu đề
+        with open(FILE_PATH, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Mã khoa', 'Tên khoa', 'Tổng số phòng'])
+    
+    ma_khoa = input("Nhập mã khoa: ")  # Nhập các yêu cầu vô
     ten_khoa = input("Nhập tên khoa: ")
     tong_phong = input("Nhập tổng số phòng: ")
-    with open(FILE_PATH, mode='a', newline='') as file:#newline là xóa cách khoảng trống
-        #mode='a': Chế độ mở tệp là "append", tức là nếu tệp đã tồn tại, dữ liệu sẽ được thêm vào cuối tệp thay vì ghi đè lên dữ liệu cũ.
-        writer = csv.writer(file)
-        #, writer giúp bạn ghi dữ liệu vào tệp CSV theo định dạng bảng, với mỗi giá trị trong một danh sách sẽ là một ô trong bảng.
 
-        writer.writerow([ma_khoa, ten_khoa, tong_phong])#ghi các yêu cầu của bài
-    print(f"Khoa '{ten_khoa}' đã được thêm.")#in lên màn
+    with open(FILE_PATH, mode='a', newline='') as file:  # Mở tệp ở chế độ append
+        writer = csv.writer(file)
+        writer.writerow([ma_khoa, ten_khoa, tong_phong])  # Ghi dữ liệu vào tệp
+
+    print(f"Khoa '{ten_khoa}' đã được thêm.")  # In lên màn hình
 

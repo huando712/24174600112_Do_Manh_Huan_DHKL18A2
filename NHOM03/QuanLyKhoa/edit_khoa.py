@@ -1,13 +1,20 @@
+
 import csv
-from QuanLyKhoa.view_khoa import ensure_file_exists, FILE_PATH
+
+FILE_PATH = "csv_file\ds_khoa.csv"  # Đường dẫn tệp CSV
 
 def edit_khoa():
     """Sửa thông tin khoa."""
-    ensure_file_exists()
+    # Kiểm tra nếu tệp không tồn tại
+    try:
+        with open(FILE_PATH, mode='r') as file:
+            reader = csv.reader(file)
+            data = list(reader)
+    except FileNotFoundError:
+        print(f"Tệp '{FILE_PATH}' không tồn tại. Vui lòng tạo tệp trước khi chỉnh sửa.")
+        return
+
     ma_khoa = input("Nhập mã khoa cần sửa: ")
-    with open(FILE_PATH, mode='r') as file:
-        reader = csv.reader(file)
-        data = list(reader)
 
     found = False
     for row in data:

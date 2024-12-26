@@ -1,14 +1,23 @@
+
 import csv
-from QuanLyKhoa.view_khoa import ensure_file_exists, FILE_PATH
+
+FILE_PATH = 'csv_file\ds_khoa.csv'
 
 def search_khoa():
     """Tìm kiếm một khoa."""
-    ensure_file_exists()
+    try:
+        # Cố gắng mở tệp để kiểm tra sự tồn tại
+        with open(FILE_PATH, mode='r') as file:
+            reader = csv.reader(file)
+            data = list(reader)
+    except FileNotFoundError:
+        print(f"Tệp '{FILE_PATH}' không tồn tại!")
+        return  # Dừng hàm nếu tệp không tồn tại
+
     keyword = input("Nhập từ khóa tìm kiếm (mã hoặc tên khoa): ").lower()
-    with open(FILE_PATH, mode='r') as file:
-        reader = csv.reader(file)
-        data = list(reader)
-        found = [row for row in data if keyword in row[0].lower() or keyword in row[1].lower()]
+
+    # Tìm các dòng có chứa từ khóa
+    found = [row for row in data if keyword in row[0].lower() or keyword in row[1].lower()]
 
     if found:
         print("{:<10} {:<20} {:<15}".format("Mã Khoa", "Tên Khoa", "Tổng Số Phòng"))
