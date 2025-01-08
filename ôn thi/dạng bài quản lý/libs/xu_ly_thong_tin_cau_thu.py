@@ -9,13 +9,13 @@ def doc_file(list_cauthu: list):
 def nhap_thong_tin(list_cauthu):
  while True:
     try:
-      ma_cau_thu= input()
-      ten_cau_thu= input()
-      ten_doi_bong= input()
-      tuoi= int(input())
-      vi_tri=input
+      ma_cau_thu= input("nhap vao ma cau thu")
+      ten_cau_thu= input("ten cau thu")
+      ten_doi_bong= input("ten doi bong")
+      tuoi= int(input("nhap vao tuoi"))
+      vi_tri=input("nhap vao vi tri")
       assert vi_tri=="thu mon" or vi_tri=="hau ve" or vi_tri=="tien ve" or vi_tri=="tien dao"
-      so_ban_thang = int(input())
+      so_ban_thang = int(input("nhap vao so ban thang"))
       
     except:
       print(" yeu cau nhap lai")
