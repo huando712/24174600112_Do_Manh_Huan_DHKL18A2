@@ -36,7 +36,6 @@ def xem_danh_sach(hang_hoa: list):
     if not hang_hoa:
         print("danh sách trống")
         return
-    hang_hoa.sort(key=lambda hang_hoa:hang_hoa[0])
     for xem in hang_hoa:
         print(f"mã hàng:{xem[0]}, tên hàng:{xem[1]}, đơn vị:{xem[2]}, số lương:{xem[3]}, đơn giá{xem[4]}, thành tiền{xem[5]}, thuế{xem[6]}")
 def sua(hang_hoa:list):
@@ -70,9 +69,18 @@ def sua(hang_hoa:list):
                 print("nhập sai")
 def xoa(hang_hoa:list):
     ma=("nhập mã hàng hóa")
+    if not hang_hoa:
+        print("không có hàng hóa này")
     for xem in hang_hoa:
         if ma==hang_hoa[0]:
             hang_hoa.remove(xem)
             print(f"cầu thủ với mã {ma} đã được xóa")
             return
-            
+def sap_xep_mat_hang(hang_hoa: list):
+    
+    if not hang_hoa:
+        print("danh sách trống")
+        return
+    hang_hoa.sort(key=lambda hang_hoa:hang_hoa[1])#vị trí thứ 2 là tên hàng nkaaaa
+    for xem in hang_hoa:
+        print(f"mã hàng:{xem[0]}, tên hàng:{xem[1]}, đơn vị:{xem[2]}, số lương:{xem[3]}, đơn giá{xem[4]}, thành tiền{xem[5]}, thuế{xem[6]}")
